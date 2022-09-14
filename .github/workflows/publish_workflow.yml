@@ -36,6 +36,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
+      deployments: write
     steps:
       - uses: actions/download-artifact@master
         with:
