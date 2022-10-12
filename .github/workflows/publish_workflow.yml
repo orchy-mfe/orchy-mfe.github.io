@@ -17,8 +17,49 @@ permissions:
   deployments: write
 
 jobs:
+  build_communication_react_mfe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          repository: orchy-mfe/orchy-examples
+      - run: cd ./examples/communication-mfe-iframe/react-microfrontend
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
+      - name: Build mfe
+        run: pnpm i && pnpm build
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_communication_react_mfe
+          path: ./dist
+  build_communication_svelte_iframe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          repository: orchy-mfe/orchy-examples
+      - run: cd ./examples/communication-mfe-iframe/svelte-iframe
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
+      - name: Build mfe
+        run: pnpm i && pnpm build
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_communication_svelte_iframe
+          path: ./dist
   build:
     runs-on: ubuntu-latest
+    needs:
+      - build_communication_react_mfe
+      - build_communication_svelte_iframe
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,6 +72,14 @@ jobs:
           version: latest
       - name: Build doc
         run: pnpm i && pnpm build
+      - uses: actions/download-artifact@master
+        with:
+          name: build_communication_react_mfe
+          path: ./build/communication-react-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_communication_svelte_iframe
+          path: ./build/communication-svelte-iframe
       - uses: actions/upload-artifact@master
         with:
           name: pages-artifact
