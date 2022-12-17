@@ -167,7 +167,7 @@ jobs:
           persist-credentials: false
           repository: orchy-mfe/orchy-doc
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.3
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: latest
       - name: Build doc
