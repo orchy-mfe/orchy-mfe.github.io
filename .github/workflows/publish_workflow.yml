@@ -33,6 +33,34 @@ jobs:
         run: pnpm i && pnpm build
       - uses: actions/upload-artifact@master
         with:
+          name: build_all_templates_angular_mfe
+          path: ./examples/all-templates/angular/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_preact_mfe
+          path: ./examples/all-templates/preact/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_react_mfe
+          path: ./examples/all-templates/react/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_solid_mfe
+          path: ./examples/all-templates/solid/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_svelte_mfe
+          path: ./examples/all-templates/svelte/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_vanilla_mfe
+          path: ./examples/all-templates/vanilla/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_all_templates_vue_mfe
+          path: ./examples/all-templates/vue/dist
+      - uses: actions/upload-artifact@master
+        with:
           name: build_communication_react_mfe
           path: ./examples/communication-mfe-iframe/react-microfrontend/dist
       - uses: actions/upload-artifact@master
@@ -74,6 +102,34 @@ jobs:
           version: latest
       - name: Build doc
         run: pnpm i && pnpm build
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_angular_mfe
+          path: ./build/all-templates-angular-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_preact_mfe
+          path: ./build/all-templates-preact-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_react_mfe
+          path: ./build/all-templates-react-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_solid_mfe
+          path: ./build/all-templates-solid-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_svelte_mfe
+          path: ./build/all-templates-svelte-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_vanilla_mfe
+          path: ./build/all-templates-vanilla-mfe
+      - uses: actions/download-artifact@master
+        with:
+          name: build_all_templates_vue_mfe
+          path: ./build/all-templates-vue-mfe
       - uses: actions/download-artifact@master
         with:
           name: build_communication_react_mfe
