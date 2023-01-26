@@ -87,6 +87,10 @@ jobs:
         with:
           name: build_routing_svelte
           path: ./examples/routing-mfe/svelte-microfrontend/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_storage_react
+          path: ./examples/storage/react-microfrontend/dist
   build_docusaurus:
     runs-on: ubuntu-latest
     needs: build_mfes
@@ -158,6 +162,10 @@ jobs:
         with:
           name: build_routing_svelte
           path: ./build/svelte-routing
+      - uses: actions/download-artifact@master
+        with:
+          name: build_storage_react
+          path: ./build/storage
       - uses: actions/upload-artifact@master
         with:
           name: pages-artifact
