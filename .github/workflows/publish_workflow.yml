@@ -91,6 +91,10 @@ jobs:
         with:
           name: build_storage_react
           path: ./examples/storage/react-microfrontend/dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: build_next_js
+          path: ./examples/next-js/nextjs-blog/out
   build_docusaurus:
     runs-on: ubuntu-latest
     steps:
@@ -177,6 +181,10 @@ jobs:
         with:
           name: build_storage_react
           path: ./build/storage
+      - uses: actions/download-artifact@master
+        with:
+          name: build_next_js
+          path: ./build/next-js
       - uses: actions/upload-artifact@master
         with:
           name: pages-artifact
